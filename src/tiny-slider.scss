@@ -1,23 +1,23 @@
-// Version: 2.5.2
+// Version: 2.7.4
 
 .tns-outer {
   padding: 0 !important; // remove padding: clientWidth = width + padding (0) = width
   [hidden] { display: none !important; }
   [aria-controls], [data-action] { cursor: pointer; }
-  &.ms-touch {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -ms-overflow-style: none; // Hides the scrollbar.
-    -ms-scroll-chaining: none; // Prevents Metro from swiping to the next tab or app.
-    -ms-scroll-snap-type: mandatory; // Forces a snap scroll behavior on your images.
-    -ms-scroll-snap-points-x: snapInterval(0%, 100%); // Defines the y and x intervals to snap to when scrolling.
-  }
+}
+.ms-touch {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  -ms-overflow-style: none; // Hides the scrollbar.
+  -ms-scroll-chaining: none; // Prevents Metro from swiping to the next tab or app.
+  -ms-scroll-snap-type: mandatory; // Forces a snap scroll behavior on your images.
+  -ms-scroll-snap-points-x: snapInterval(0%, 100%); // Defines the y and x intervals to snap to when scrolling.
 }
 .tns-slider {
   -webkit-transition: all 0s;
   -moz-transition: all 0s;
   transition: all 0s;
-  > .tns-item {
+  > div, > li {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -26,7 +26,7 @@
 
 .tns-horizontal.tns-subpixel {
   white-space: nowrap;
-  > .tns-item {
+  > div, > li {
     display: inline-block;
     vertical-align: top;
     white-space: normal;
@@ -38,7 +38,7 @@
     display: table;
     clear: both;
   }
-  > .tns-item {
+  > div, > li {
     float: left;
     margin-right: -100%;
   }
@@ -53,7 +53,7 @@
   left: 0;
   min-height: 1px; // make sure slider container is visible
   // overflow: hidden;
-  > .tns-item {
+  > div, > li {
     position: absolute;
     left: -100%;
     -webkit-transition: transform 0s, opacity 0s;
@@ -93,4 +93,57 @@
   opacity: 0;
   filter: alpha(opacity=0);
   z-index: -1;
+}
+
+
+// *** Detecting browser capability ***
+// Check calc() capability / IE Edge browsers
+// .tns-t-subp1 {
+//   width: 10px;
+//   &:after {
+//     content: '';
+//     display: table;
+//     clear: both;
+//   }
+//   > div {
+//     float: left;
+//     width: 5.5px;
+//     height: 10px;
+//   }
+// }
+
+$width: 310px;
+$height: 10px;
+$count: 70;
+$perpage: 3;
+
+.tns-t {
+  &-subp2 {
+    margin: 0 auto;
+    width: $width;
+    position: relative;
+    height: $height;
+    overflow: hidden;
+  }
+  &-ct {
+    width: (100% * $count / $perpage);
+    width: -webkit-calc(100% * $count / $perpage);
+    width: -moz-calc(100% * $count / $perpage);
+    width: calc(100% * $count / $perpage);
+    position: absolute;
+    right: 0;
+    &:after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    > div {
+      width: (100% / $count);
+      width: -webkit-calc(100% / $count);
+      width: -moz-calc(100% / $count);
+      width: calc(100% / $count);
+      height: $height;
+      float: left;
+    }
+  }
 }

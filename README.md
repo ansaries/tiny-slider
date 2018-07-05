@@ -1,9 +1,10 @@
 # tiny-slider 2.0
-![version](https://img.shields.io/badge/Version-2.5.2-green.svg)  
+[![](https://data.jsdelivr.com/v1/package/npm/tiny-slider/badge?style=rounded)](https://www.jsdelivr.com/package/npm/tiny-slider)
+![version](https://img.shields.io/badge/Version-2.7.4-green.svg)  
 Tiny slider for all purposes, inspired by [Owl Carousel](https://owlcarousel2.github.io/OwlCarousel2/).   
 [Demos](http://ganlanyuan.github.io/tiny-slider/tests/index.html)   
-[Tests](http://ganlanyuan.github.io/tiny-slider/tests/tests.html)  
-Can be tested on Firefox 12+, Chrome 15+, Safari 4+, Opera 12.1+, IE8+.  
+[Tests](http://ganlanyuan.github.io/tiny-slider/tests/tests.html)
+(Can be tested on Firefox 12+, Chrome 15+, Safari 5.1+, Opera 12.1+, IE9+)   
 Note: some features may need a manual test.  
 
 *Previous versions*:
@@ -68,13 +69,13 @@ Note: some features may need a manual test.
 `bower install tiny-slider` or `npm install tiny-slider`
 
 ## Usage
-##### 1. Include tiny-slider
+#### 1. Include tiny-slider
 via [cdnjs](https://cdnjs.com/libraries/tiny-slider):  
 ```html
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.5.2/tiny-slider.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.7.4/tiny-slider.css">
 
-<!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.5.2/min/tiny-slider.helper.ie8.js"></script><![endif]-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.5.2/min/tiny-slider.js"></script>
+<!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.7.4/min/tiny-slider.helper.ie8.js"></script><![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.7.4/min/tiny-slider.js"></script>
 
 <!-- NOTE: from v2.2.1 tiny-slider.js is no longer required to be in <body> -->
 ```
@@ -84,7 +85,7 @@ Or import it via `webpack` or `rollup`:
 import { tns } from "path/to/tiny-slider/src/tiny-slider.module"
 ```
 
-##### 2. Add markup
+#### 2. Add markup
 ```html
 <div class="my-slider">
   <div></div>
@@ -94,7 +95,7 @@ import { tns } from "path/to/tiny-slider/src/tiny-slider.module"
 <!-- or ul.my-slider > li -->
 ```
 
-##### 3. Call tiny-slider
+#### 3. Call tns()
 ```html
 <script>
   var slider = tns({
@@ -115,46 +116,51 @@ import { tns } from "path/to/tiny-slider/src/tiny-slider.module"
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `container` | Node \| String | Default: `document.querySelector('.slider')`. <br> The slider container element or selector. |
-| `mode` | `'carousel'` \| `'gallery'` | Default: `'carousel'`. <br> Controls animation behaviour. <br> With `carousel` everything slides to the side, while `gallery` uses fade animations and changes all slides at once. |
-| `axis` | `'horizontal'` \| `'vertical'` | Default: `horizontal`. <br> The axis of the slider. |
-| `items` | Integer | Default: `1`. <br> Number of slides being displayed in the viewport. |
-| `gutter` | Integer | Default: `0`. <br> Space between slides (in "px"). |
-| `edgePadding` | Integer | Default: `0`. <br> Space on the outside (in "px"). |
-| `fixedWidth` | Integer \| false | Default: `false`. <br> Controls `width` attribute of the slides. |
-| `slideBy` | Integer \| `'page'` | Default: `1`. <br> Number of slides going on one "click". |
-| `controls` | Boolean | Default: `true`. <br> Controls the display and functionalities of `controls` components (prev/next buttons). If `true`, display the `controls` and add all functionalities. |
-| `controlsText` | (Text \| Markup) Array | Default: `['prev', 'next']`. <br> Text or markup in the prev/next buttons. |
-| `controlsContainer` | Node \| String \| `false` | Default: `false`. <br> The container element/selector around the prev/next buttons. <br> `controlsContainer` must have at least 2 child elements. |
-| `nav` | Boolean | Default: `true`. <br> Controls the display and functionalities of `nav` components (dots). If `true`, display the `nav` and add all functionalities. |
-| `navContainer` | Node \| String \| `false` | Default: `false`. <br> The container element/selector around the dots. <br> `navContainer` must have at least same number of children as the slides. |
-| `navAsThumbnails` | Boolean | Default: `false`. <br> Indecate if the dots are thurbnails. If `true`, they will always be visible even when more than 1 slides displayed in the viewport. |
-| `arrowKeys` | Boolean | Default: `false`. <br> Allows using arrow keys to switch slides. |
-| `speed` | Integer | Default: `300`. <br> Speed of the slide animation (in "ms"). |
-| `autoplay` | Boolean | Default: `false`. <br> Toggles the automatic change of slides. |
-| `autoplayTimeout` | Integer | Default: `5000`. <br> Time between 2 `autoplay` slides change (in "ms"). |
-| `autoplayDirection` | `'forward'` \| `'backward'` | Default: `'forward'`. <br> Direction of slide movement (ascending/descending the slide index). |
-| `autoplayText` | Array (Text \| Markup) | Default: `['start', 'stop']`. <br> Text or markup in the autoplay start/stop button. |
-| `autoplayHoverPause` | Boolean | Default: `false`. <br> Stops sliding on mouseover. |
-| `autoplayButton` | Node \| String \| `false` | Default: `false`. <br> The customized autoplay start/stop button or selector. |
-| `autoplayButtonOutput` | Boolean | Default: `true`. <br> Output `autoplayButton` markup when `autoplay` is true but a customized `autoplayButton` is not provided. |
-| `autoplayResetOnVisibility` | Boolean | Default: `true`. <br> Pauses the sliding when the page is invisiable and resumes it when the page become visiable again. ([Page Visibility API](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API)) |
-| `animateIn` | String | Default: `'tns-fadeIn'`. <br> Name of intro animation `class`. |
-| `animateOut` | String | Default: `'tns-fadeOut'`. <br> Name of outro animation `class`. |
-| `animateNormal` | String | Default: `'tns-normal'`. <br> Name of default animation `class`. |
-| `animateDelay` | Integer \| `false` | Default: `false`. <br> Time between each `gallery` animation (in "ms"). |
-| `loop` | Boolean | Default: `true`. <br> Moves to the first slide with the same direction when reaching the last slide. |
-| `rewind` | Boolean | Default: `false`. <br> Moves to the first slide with the opposite direction when reaching the last slide. |
-| `autoHeight` | Boolean | Default: `false`. <br> Height of slider container changes according to each slide's height. |
-| `responsive` | Map: { <br>&emsp;breakpoint: { <br>&emsp;&emsp;key: value<br>&emsp;} <br>} \| `false` | Default: `false`. <br>Breakpoint: Integer.<br>Defines options for different viewport widths (see [Responsive Options](#responsive-options)). <br> |
-| `lazyload` | Boolean | Default: `false`. <br> Enables lazyloading images that are currently not viewed, thus saving bandwidth (see [demo](http://ganlanyuan.github.io/tiny-slider/tests/#lazyload_wrapper)). |
-| `touch` | Boolean | Default: `true`. <br> Activates input detection for touch devices. |
-| `mouseDrag` | Boolean | Default: `false`. <br> Changing slides by dragging them. |
-| `nested` | `"inner"` \| `"outer"` \| `false` | Default: `false`. <br> Difine the relationship between nested sliders. (see [demo](http://ganlanyuan.github.io/tiny-slider/tests/#nested_wrapper)) <br>Make sure you run the inner slider first, otherwise the height of the inner slider container will be wrong. |
-| `freezable` | Boolean | Default: `true`. <br> Indicate whether the slider will be frozen (`controls`, `nav`, `autoplay` and other functions will stop work) when all slides can be displayed in one page. |
-| `disable` | Boolean | Default: `false`. <br> Disable slider. |
-| `startIndex` | Integer | Default: `0`. <br> The initial `index` of the slider. |
-| `onInit` | Function \| `false` | Default: `false`. <br> Callback to be run on initialization. |
+| `container` | Node \| String | Default: `'.slider'`. <br> The slider container element or selector. |
+| `mode` | "carousel" \| "gallery" | Default: "carousel". <br> Controls animation behaviour. <br> With `carousel` everything slides to the side, while `gallery` uses fade animations and changes all slides at once. |
+| `axis` | "horizontal" \| "vertical" | Default: "horizontal". <br> The axis of the slider. |
+| `items` | Integer | Default: 1. <br> Number of slides being displayed in the viewport. <br> If slides less than `items`, the slider won't be initialized. |
+| `gutter` | Integer | Default: 0. <br> Space between slides (in "px"). |
+| `edgePadding` | Integer | Default: 0. <br> Space on the outside (in "px"). |
+| `fixedWidth` | Integer \| false | Default: false. <br> Controls `width` attribute of the slides. |
+| `fixedWidthViewportWidth` | Integer \| false | Default: false. <br> Maximum width of `fixedWidth` slider viewport. |
+| `slideBy` | Integer \| "page" | Default: 1. <br> Number of slides going on one "click". |
+| `controls` | Boolean | Default: true. <br> Controls the display and functionalities of `controls` components (prev/next buttons). If `true`, display the `controls` and add all functionalities. |
+| `controlsText` | (Text \| Markup) Array | Default: ["prev", "next"]. <br> Text or markup in the prev/next buttons. |
+| `controlsContainer` | Node \| String \| false | Default: false. <br> The container element/selector around the prev/next buttons. <br> `controlsContainer` must have at least 2 child elements. |
+| `prevButton` | Node \| String \| false | Default: false. <br> Customized previous buttons. <br> This option will be ignored if `controlsContainer` is a Node element or a CSS selector. |
+| `nextButton` | Node \| String \| false | Default: false. <br> Customized next buttons. <br> This option will be ignored if `controlsContainer` is a Node element or a CSS selector. |
+| `nav` | Boolean | Default: true. <br> Controls the display and functionalities of `nav` components (dots). If `true`, display the `nav` and add all functionalities. |
+| `navContainer` | Node \| String \| false | Default: false. <br> The container element/selector around the dots. <br> `navContainer` must have at least same number of children as the slides. |
+| `navAsThumbnails` | Boolean | Default: false. <br> Indecate if the dots are thurbnails. If `true`, they will always be visible even when more than 1 slides displayed in the viewport. |
+| `arrowKeys` | Boolean | Default: false. <br> Allows using arrow keys to switch slides. |
+| `speed` | Integer | Default: 300. <br> Speed of the slide animation (in "ms"). |
+| `autoplay` | Boolean | Default: false. <br> Toggles the automatic change of slides. |
+| `autoplayTimeout` | Integer | Default: 5000. <br> Time between 2 `autoplay` slides change (in "ms"). |
+| `autoplayDirection` | "forward" \| "backward" | Default: "forward". <br> Direction of slide movement (ascending/descending the slide index). |
+| `autoplayText` | Array (Text \| Markup) | Default: ["start", "stop"]. <br> Text or markup in the autoplay start/stop button. |
+| `autoplayHoverPause` | Boolean | Default: false. <br> Stops sliding on mouseover. |
+| `autoplayButton` | Node \| String \| false | Default: false. <br> The customized autoplay start/stop button or selector. |
+| `autoplayButtonOutput` | Boolean | Default: true. <br> Output `autoplayButton` markup when `autoplay` is true but a customized `autoplayButton` is not provided. |
+| `autoplayResetOnVisibility` | Boolean | Default: true. <br> Pauses the sliding when the page is invisiable and resumes it when the page become visiable again. ([Page Visibility API](https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API)) |
+| `animateIn` | String | Default: "tns-fadeIn". <br> Name of intro animation `class`. |
+| `animateOut` | String | Default: "tns-fadeOut". <br> Name of outro animation `class`. |
+| `animateNormal` | String | Default: "tns-normal". <br> Name of default animation `class`. |
+| `animateDelay` | Integer \| false | Default: false. <br> Time between each `gallery` animation (in "ms"). |
+| `loop` | Boolean | Default: true. <br> Moves throughout all the slides seamlessly. |
+| `rewind` | Boolean | Default: false. <br> Moves to the opposite edge when reaching the first or last slide. |
+| `autoHeight` | Boolean | Default: false. <br> Height of slider container changes according to each slide's height. |
+| `responsive` | Map: { <br>&emsp;breakpoint: { <br>&emsp;&emsp;key: value<br>&emsp;} <br>} \| false | Default: false. <br>Breakpoint: Integer.<br>Defines options for different viewport widths (see [Responsive Options](#responsive-options)). <br> |
+| `lazyload` | Boolean | Default: false. <br> Enables lazyloading images that are currently not viewed, thus saving bandwidth (see [demo](http://ganlanyuan.github.io/tiny-slider/tests/#lazyload_wrapper)). |
+| `touch` | Boolean | Default: true. <br> Activates input detection for touch devices. |
+| `mouseDrag` | Boolean | Default: false. <br> Changing slides by dragging them. |
+| `swipeAngle` | Integer \| Boolean | Default: 15. <br> Swipe or drag will not be triggered if the angle is not inside the range when set. |
+| `nested` | "inner" \| "outer" \| false | Default: false. <br> Difine the relationship between nested sliders. (see [demo](http://ganlanyuan.github.io/tiny-slider/tests/#nested_wrapper)) <br>Make sure you run the inner slider first, otherwise the height of the inner slider container will be wrong. |
+| `freezable` | Boolean | Default: true. <br> Indicate whether the slider will be frozen (`controls`, `nav`, `autoplay` and other functions will stop work) when all slides can be displayed in one page. |
+| `disable` | Boolean | Default: false. <br> Disable slider. |
+| `startIndex` | Integer | Default: 0. <br> The initial `index` of the slider. |
+| `onInit` | Function \| false | Default: false. <br> Callback to be run on initialization. |
+| `useLocalStorage` | Boolean | Default: true. <br> Save browser capability variables to [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) and without detecting them everytime the slider runs if set to `true`. |
 
 *[top↑](#tiny-slider-20)*  
 
@@ -178,8 +184,8 @@ The following options can be redefined in `responsive` field:
 `autoplayTimeout`,   
 `touch`,   
 `mouseDrag`,   
-`arrowKeys`,
-`disable`.   
+`arrowKeys`,   
+`disable`   
 ```javascript
 <script>
   var slider = tns({
@@ -201,17 +207,26 @@ The following options can be redefined in `responsive` field:
   });
 </script>
 ```
-NOTE: 
-- `fixedWidth` can only be changed to different positive integers. It can't be changed to different data type, 0 or negtive integer.
+NOTE: `fixedWidth` can only be changed to other positive integers. It can't be changed to negtive integer, 0 or other data type.
 *[top↑](#tiny-slider-20)*  
 
 ## Methods
-There are 2 ways to get slider information, both return `info` Object:   
-1. `getInfo` method.   
-2. Subscribe to an event.   
+The slider returns a slider object with some properties and methods once it's initialized:
 ```javascript
-// info Object
-info = {
+{
+  getInfo: info(),
+  events: events, // Object
+  goTo: goTo(),
+  play: play(),
+  pause: pause(),
+  isOn: isOn, // Boolean
+  rebuild: rebuild(),
+  destroy: destroy()
+}
+```
+To get the slider information, you can either use the `getInfo()` method or subscribe to an Event. Both return an Object:   
+```javascript
+{
                 container: container, // slider container
                slideItems: slideItems, // slides list
              navContainer: navContainer, // nav container
@@ -231,20 +246,20 @@ info = {
          navCurrentCached: navCurrentCached, // previous dot index
         visibleNavIndexes: visibleNavIndexes, // visible nav indexes
   visibleNavIndexesCached: visibleNavIndexesCached,
+                    sheet: sheet,
                     event: e || {}, // event object if available
 };
 ```
 
-##### getInfo
+#### getInfo
+Get slider information.
 ```javascript
-// get info object
-var slider = tns(...);
 slider.getInfo();
 
 document.querySelector('.next-button').onclick = function () {
   // get slider info
   var info = slider.getInfo(),
-      indexPrev = info.indexCached;
+      indexPrev = info.indexCached,
       indexCurrent = info.index;
 
   // update style based on index
@@ -253,10 +268,9 @@ document.querySelector('.next-button').onclick = function () {
 };
 ```
 
-##### goTo
+#### goTo
+Go to specific slide by number or keywords. The first slide is referred to as 1.
 ```javascript
-// go to slides by number or keywords
-var slider = tns(...);
 slider.goTo(3);
 slider.goTo('prev');
 slider.goTo('next');
@@ -268,16 +282,40 @@ document.querySelector('.goto-button').onclick = function () {
 };
 ```
 
-##### destroy
+#### play
+Programmatically start slider autoplay when `autoplay: true`.
 ```javascript
-var slider = tns(...);
+slider.play();
+```
+
+#### pause
+Programmatically stop slider autoplay when `autoplay: true`.
+```javascript
+slider.pause();
+```
+
+<!-- #### updateSliderHeight
+Manually adjust slider height when `autoHeight` is `true`.
+```javascript
+slider.updateSliderHeight();
+``` -->
+
+#### destroy
+Destroy the slider.
+```javascript
 slider.destroy();
 ```
-## Custom Events
-Available events include: `indexChanged`, `transitionStart`, `transitionEnd`, `touchStart`, `touchMove` and `touchEnd`.
-```javascript
-var slider = tns(...);
 
+#### rebuild
+Rebuild the slider after destroy.
+```javascript
+slider = slider.rebuild();
+// this method returns a new slider Object with the same options with the original slider
+```
+
+## Custom Events
+Available events include: `indexChanged`, `transitionStart`, `transitionEnd`, `touchStart`, `touchMove`, `touchEnd`, `dragStart`, `dragMove` and `dragEnd`.
+```javascript
 var customizedFunction = function (info) {
   // direct access to info object
   console.log(info.event.type, info.container.id);
@@ -299,16 +337,19 @@ slider.events.off('transitionEnd', customizedFunction);
 
 ## Browser Support
 Firefox 8+ ✓  
-Chrome 15+ ✓  
+Chrome 15+ ✓  (Should works on _Chrome 4-14_ as well, but I couldn't test it.)  
 Safari 4+ ✓  
 Opera 12.1+ ✓   
 IE 8+ ✓  
-Should be working on _Chrome 4-14_ as well, but I couldn't test it.  
 
 ## Support
-[Browserstack](https://www.browserstack.com/)  
+<a href="https://www.browserstack.com/" target="_blank"><img src="logos/browserstack.svg" alt="Browser Stack" width="170"></a><br>Live tests and Automated Tests <br>
+<br>
+<a href="https://crossbrowsertesting.com/" target="_blank"><img src="logos/cbt.svg" width="230" alt="Cross Browser Testing"></a><br>Live tests, Screenshots and Automated Tests <br>
+<br>
 [Cdnjs](https://cdnjs.com/)  
-Images used in the demos are from https://unsplash.com/.
+<br>
+Images on demo page are from https://unsplash.com/.
 
 ## License
 This project is available under the [MIT](https://opensource.org/licenses/mit-license.php) license.  

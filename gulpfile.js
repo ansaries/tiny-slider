@@ -1,5 +1,6 @@
 const rollup = require('rollup').rollup;
 const resolve = require('rollup-plugin-node-resolve');
+const babel = require('rollup-plugin-babel');
 
 const gulp = require('gulp');
 const packages = require('/www/package.json');
@@ -12,7 +13,7 @@ const path = require('path');
 
 let sourcemapsDest = 'sourcemaps';
 let libName = 'tiny-slider',
-    testName = 'script',
+    testName = 'tests',
     modulePostfix = '.module',
     helperIEPostfix = '.helper.ie8',
     script = libName + '.js',
@@ -50,7 +51,7 @@ gulp.task('sass', function () {
 // Script Task
 gulp.task('script', function () {
   return rollup({
-    entry: pathSrc + script,
+    input: pathSrc + script,
     context: 'window',
     treeshake: false,
     plugins: [
@@ -62,7 +63,7 @@ gulp.task('script', function () {
     ],
   }).then(function (bundle) {
     return bundle.write({
-      dest: pathDest + libName + '.js',
+      file: pathDest + libName + '.js',
       format: 'es',
       // moduleName: 'tns',
     });
@@ -71,10 +72,10 @@ gulp.task('script', function () {
 
 gulp.task('helper-ie8', function () {
   return rollup({
-    entry: pathSrc + helperIEScript,
+    input: pathSrc + helperIEScript,
   }).then(function (bundle) {
     return bundle.write({
-      dest: pathDest + helperIEScript,
+      file: pathDest + helperIEScript,
       format: 'es',
     });
   });
@@ -109,7 +110,7 @@ gulp.task('min', ['editPro'], function () {
 
 gulp.task('test', function () {
   return rollup({
-    entry: pathTest + testScript,
+    input: pathTest + testScript,
     context: 'window',
     // treeshake: false,
     plugins: [
@@ -118,10 +119,13 @@ gulp.task('test', function () {
         main: true,
         browser: true,
       }),
+      // babel({
+      //   exclude: 'node_modules/**' // only transpile our source code
+      // }),
     ],
   }).then(function (bundle) {
     return bundle.write({
-      dest: pathTest + testName + '.min.js',
+      file: pathTest + testName + '.min.js',
       format: 'iife',
       moduleName: 'tiny',
     });
@@ -184,8 +188,8 @@ gulp.task('server', function() {
   gulp.watch(pathSrc + script, ['makeDevCopy']);
   gulp.watch(scriptSources, ['min']);
   gulp.watch(pathSrc + helperIEScript, ['helper-ie8']);
-  gulp.watch([pathTest + testScript], ['test']);
-  gulp.watch(['**/*.html', pathTest + '*.js', pathDest + '*.css', pathDest + 'min/*.js']).on('change', browserSync.reload);
+  // gulp.watch([pathTest + testScript], ['test']);
+  gulp.watch(['**/*.html', pathTest + '*.js', '!' + pathTest + 'tests-async.js', pathDest + '*.css', pathDest + 'min/*.js']).on('change', browserSync.reload);
 });
 
 // Default Task

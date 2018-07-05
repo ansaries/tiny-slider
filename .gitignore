@@ -6,6 +6,8 @@
 *.scssc
 *.swp
 *.log
+/*.html
+*.sketch
 
 /.codekit-cache/
 /bower_components/

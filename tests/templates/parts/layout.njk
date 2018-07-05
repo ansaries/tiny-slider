@@ -53,7 +53,7 @@
     'autoHeight',
     'nested'
   ] %}
-  {# {% set sliders = ['rewind'] %} #}
+  {# {% set sliders = ['base'] %} #}
 {% else %}
   {% set sliders = [
     'base',
@@ -83,7 +83,7 @@
     'autoHeight',
     'nested'
   ] %}
-  {# {% set sliders = ['customize'] %} #}
+  {# {% set sliders = [] %} #}
 {% endif %}
 
 {% set titles = [
@@ -97,6 +97,18 @@
   "Omnis dolorum eum blanditiis, ratione voluptates quod.", 
   "Animi quis iste ex ullam, similique laboriosam.", "D
   eserunt, ipsam! Placeat ullam, nam incidunt odit!"
+] %}
+
+{% set collectionId = [
+  "993239",
+  "1673600",
+  "1513994",
+  "502925",
+  "1891993",
+  "1103088",
+  "548245",
+  "539469",
+  "end"
 ] %}
 
 {% block main %}
@@ -145,7 +157,7 @@
         {% if slide === 'lazyload' %}
           {% for i in range(1, 6) %}
             <div>
-              <div><img class="tns-lazy-img" src="data:image/gif;base64,R0lGODlhAQABAPAAAMzMzAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="images/600x600/{{ i }}.png" alt="" width="600" height="600"></div>
+              <div><img class="tns-lazy-img" src="data:image/gif;base64,R0lGODlhAQABAPAAAMzMzAAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="https://source.unsplash.com/collection/{{ collectionId[i - 1] }}/600x600" alt="" width="600" height="600"></div>
               <p>{{ titles[i] }}</p>
             </div>
           {% endfor %}
@@ -154,16 +166,17 @@
         {% elif slide === 'customize' %}
           {% for i in range(1, 6) %}
             <div>
-              <div><img src="images/600x400/{{ i }}.png" alt="" width="600" height="400"></div>
+              <div><img src="https://source.unsplash.com/collection/{{ collectionId[i - 1] }}/600x400" alt="" width="600" height="400"></div>
               <p>{{ titles[i] }}</p>
             </div>
           {% endfor %}
 
         {# auto height #}
         {% elif slide === 'autoHeight' %}
+          {% set hs = [400, 600, 500, 700, 400, 500, 700] %}
           {% for i in range(1, 6) %}
             <div>
-              <div><img src="images/1000x{{ [600, 700, 800, 900] | random }}/{{ i }}.png" alt=""></div>
+              <div><img src="https://source.unsplash.com/collection/{{ collectionId[i - 1] }}/1000x{{ hs[i-1] }}" alt=""></div>
               <p>{{ titles[i] }}</p>
             </div>
           {% endfor %}
@@ -203,7 +216,7 @@
           {% for i in range(1, 8) %}
           <div class="item">
             {% if slide === 'mouse-drag' %}
-              <div><a href=""><img src="images/600x400/{{ i }}.png" width="600" height="400" alt=""></a></div>
+              <div><a href=""><img src="https://source.unsplash.com/collection/{{ collectionId[i - 1] }}/600x400" width="600" height="400" alt=""></a></div>
             {% else %}
               <div class="img img-{{ i }}"><a href="">{{ i - 1 }}</a></div>
             {% endif %}
@@ -227,7 +240,7 @@
         <div class="customize-tools">
           <ul class="thumbnails" id="customize-thumbnails">
             {% for i in range(1, 6) %}
-              <li><img src="images/50x50/{{ i }}.png" alt="" width="50" height="50"></li>
+              <li><img src="https://source.unsplash.com/collection/{{ collectionId[i - 1] }}/50x50" alt="" width="50" height="50"></li>
             {% endfor %}
           </ul>
           <ul class="controls" id="customize-controls">
@@ -292,13 +305,27 @@
   {% endif %}
 {% endblock %}
 
-{% if page === 'demos' %}
-<script src="js/prism.js"></script>
-{% endif %}
-<script src="js/script.min.js"></script>
+<script>
+  var isTestPage,
+      initFns = {},
+      doc = document,
+      isDemoPage = doc.body.getAttribute('data-page') === 'demos',
+      classIn = (doc.body.getAttribute('data-page') === 'demos') ? 'jello' : 'tns-fadeIn',
+      classOut = (doc.body.getAttribute('data-page') === 'demos') ? 'rollOut' : 'tns-fadeOut',
+      sliders = new Object(),
+      speed = Number(document.body.getAttribute('data-speed')),
+      edgepadding = 50,
+      gutter = 10;
+</script>
+<script src="js/options.js"></script>
 
 {% block footerScripts %}
 {% endblock %}
+
+{% if page === 'demos' %}
+<script src="js/prism.js"></script>
+{% endif %}
+<script src="js/run.js"></script>
 
 </body>
 </html>
